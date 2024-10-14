@@ -9,19 +9,19 @@
       <!-- Categories Links (Desktop) -->
       <nav class="hidden md:flex space-x-6">
         <NuxtLink
-          to="/electronics"
+          to="/"
           class="text-lg font-medium text-gray-800 hover:text-blue-600"
         >Electronics</NuxtLink>
         <NuxtLink
-          to="/health-beauty"
+          to="/"
           class="text-lg font-medium text-gray-800 hover:text-blue-600"
         >Health & Beauty</NuxtLink>
         <NuxtLink
-          to="/home-office"
+          to="/"
           class="text-lg font-medium text-gray-800 hover:text-blue-600"
         >Home & Office</NuxtLink>
         <NuxtLink
-          to="/computing"
+          to="/"
           class="text-lg font-medium text-gray-800 hover:text-blue-600"
         >Computing</NuxtLink>
       </nav>
@@ -53,7 +53,9 @@
             class="focus:outline-none text-lg placeholder-gray-400 w-full"
           />
         </div>
-        <NuxtLink to="/account" class="flex flex-row">
+
+        <!-- Account Icon -->
+        <NuxtLink to="/" class="flex flex-row">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="2rem"
@@ -92,6 +94,7 @@
           </svg>
         </NuxtLink>
 
+        <!-- Cart Icon -->
         <NuxtLink to="/cart" class="block relative">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -104,11 +107,11 @@
               d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z"
             />
           </svg>
+          <!-- Dynamic Cart Items Count -->
           <span
             class="absolute top-0 right-0 block w-4 h-4 text-xs text-white bg-red-500 rounded-full text-center"
-            >0</span
+            >{{ cartItemCount }}</span
           >
-          <!-- Cart items -->
         </NuxtLink>
       </div>
     </div>
@@ -117,19 +120,19 @@
     <div v-if="isMenuOpen" class="md:hidden bg-white shadow-md py-4 px-6">
       <nav class="space-y-4">
         <NuxtLink
-          to="/electronics"
+          to="/"
           class="block text-lg font-medium text-gray-800 hover:text-blue-600"
         >Electronics</NuxtLink>
         <NuxtLink
-          to="/health-beauty"
+          to="/"
           class="block text-lg font-medium text-gray-800 hover:text-blue-600"
         >Health & Beauty</NuxtLink>
         <NuxtLink
-          to="/home-office"
+          to="/"
           class="block text-lg font-medium text-gray-800 hover:text-blue-600"
         >Home & Office</NuxtLink>
         <NuxtLink
-          to="/computing"
+          to="/"
           class="block text-lg font-medium text-gray-800 hover:text-blue-600"
         >Computing</NuxtLink>
       </nav>
@@ -138,12 +141,27 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { ref, computed, onBeforeMount } from 'vue';
+import { useCartStore } from '@/store/cart'; // Import the cart store
 
 export default {
   name: 'default',
   setup() {
     const isMenuOpen = ref(false); // Mobile menu state
+    const cartStore = useCartStore(); // Initialize the cart store
+
+    // Call `loadCart` to load cart items from localStorage on component mount
+    onBeforeMount(() => {
+      cartStore.loadCart();
+    });
+
+    // Reactive cart item count computed from the store
+    const cartItemCount = computed(() => {
+      return cartStore.cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
+    });
 
     // Toggle the mobile menu
     const toggleMenu = () => {
@@ -153,6 +171,7 @@ export default {
     return {
       isMenuOpen,
       toggleMenu,
+      cartItemCount, // Provide cart item count to the template
     };
   },
 };

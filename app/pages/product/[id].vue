@@ -94,14 +94,14 @@
         </div>
       </div>
 
-      <ProductList :title="'More items to explore'" :products="bestSellers" />
+      <ProductList :title="'More items to explore'" " />
 
     </div>
   </template>
   
   <script setup lang="ts">
     // TypeScript logic (if needed) goes here
-    import ProductList from "@/components/Productlist.vue"; // adjust the path based on your project structure
+    import ProductList from "~/components/ProductList.vue"; // adjust the path based on your project structure
 
 
     const bestSellers = [
