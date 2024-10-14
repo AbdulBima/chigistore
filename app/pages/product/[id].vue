@@ -101,7 +101,7 @@
   
   <script setup lang="ts">
     // TypeScript logic (if needed) goes here
-    import ProductList from "~/components/ProductList.vue"; // adjust the path based on your project structure
+    import ProductList from "@/components/ProductList.vue"; // adjust the path based on your project structure
 
 
     const bestSellers = [
