@@ -45,7 +45,7 @@
   
   <script lang="ts">
   import { defineComponent } from "vue";
-  import { useCartStore } from "~/store/cart"; // Import the cart store
+  import { useCartStore } from "@/store/cart"; // Import the cart store
   
   interface Product {
     id: number;
