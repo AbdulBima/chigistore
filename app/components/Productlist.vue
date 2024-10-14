@@ -9,7 +9,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Loop through products -->
       
-      <NuxtLink to="/product/gdgdhd">
+      
 
         <div
           v-for="(product, index) in products"
@@ -17,11 +17,12 @@
           class="bg-white rounded overflow-hidden shadow-md cursor-pointer hover:scale-[1.02] transition-all"
         >
           <div class="w-full aspect-w-12 aspect-h-8 lg:h-[500px]">
-            <img
+            <NuxtLin to="/product/gdgdhd">  <img
               :src="product.image"
               :alt="`Product ${index + 1}`"
               class="h-full w-full object-cover"
-            />
+            /></NuxtLin>
+          
           </div>
           <div class="p-4">
             <h3 class="text-lg font-bold text-gray-800">{{ product.title }}</h3>
@@ -36,7 +37,6 @@
             </button>
           </div>
         </div>
-      </NuxtLink>
         
 
 
