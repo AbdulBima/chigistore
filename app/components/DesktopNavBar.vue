@@ -3,33 +3,27 @@
     <div class="w-full mx-auto flex items-center justify-between px-6 py-4">
       <!-- Logo Section -->
       <div class="flex items-start space-x-4">
-        <h1 class="text-xl font-bold">Logo</h1>
+        <NuxtLink to="/" class="text-xl font-bold">Logo</NuxtLink>
       </div>
-
-     
 
       <!-- Categories Links (Desktop) -->
       <nav class="hidden md:flex space-x-6">
         <NuxtLink
           to="/electronics"
           class="text-lg font-medium text-gray-800 hover:text-blue-600"
-          >Electronics</NuxtLink
-        >
+        >Electronics</NuxtLink>
         <NuxtLink
           to="/health-beauty"
           class="text-lg font-medium text-gray-800 hover:text-blue-600"
-          >Health & Beauty</NuxtLink
-        >
+        >Health & Beauty</NuxtLink>
         <NuxtLink
           to="/home-office"
           class="text-lg font-medium text-gray-800 hover:text-blue-600"
-          >Home & Office</NuxtLink
-        >
+        >Home & Office</NuxtLink>
         <NuxtLink
           to="/computing"
           class="text-lg font-medium text-gray-800 hover:text-blue-600"
-          >Computing</NuxtLink
-        >
+        >Computing</NuxtLink>
       </nav>
 
       <!-- Account and Cart Icons -->
@@ -40,8 +34,8 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="1.5rem"
-            height="1.5rem"
+            width="2rem"
+            height="2rem"
             viewBox="0 0 24 24"
           >
             <path
@@ -62,8 +56,8 @@
         <NuxtLink to="/account" class="flex flex-row">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="1.5rem"
-            height="1.5rem"
+            width="2rem"
+            height="2rem"
             viewBox="0 0 24 24"
           >
             <g
@@ -101,8 +95,8 @@
         <NuxtLink to="/cart" class="block relative">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="1.5rem"
-            height="1.5rem"
+            width="2rem"
+            height="2rem"
             viewBox="0 0 24 24"
           >
             <path
@@ -111,29 +105,11 @@
             />
           </svg>
           <span
-            class="absolute top-0 right-0 block w-3 h-3 text-xs text-white bg-red-500 rounded-full text-center"
-            >3</span
+            class="absolute top-0 right-0 block w-4 h-4 text-xs text-white bg-red-500 rounded-full text-center"
+            >0</span
           >
           <!-- Cart items -->
         </NuxtLink>
-
-         <!-- Hamburger Menu (mobile) -->
-      <div class="md:hidden flex items-end">
-        <button @click="toggleMenu" class="text-gray-600">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.5rem"
-            height="1.5rem"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="black"
-              fill-rule="evenodd"
-              d="M16 16h4v4h-4zm-6 0h4v4h-4zm-6 0h4v4H4zm12-6h4v4h-4zm-6 0h4v4h-4zm-6 0h4v4H4zm12-6h4v4h-4zm-6 0h4v4h-4zM4 4h4v4H4z"
-            />
-          </svg>
-        </button>
-      </div>
       </div>
     </div>
 
@@ -143,40 +119,41 @@
         <NuxtLink
           to="/electronics"
           class="block text-lg font-medium text-gray-800 hover:text-blue-600"
-          >Electronics</NuxtLink
-        >
+        >Electronics</NuxtLink>
         <NuxtLink
           to="/health-beauty"
           class="block text-lg font-medium text-gray-800 hover:text-blue-600"
-          >Health & Beauty</NuxtLink
-        >
+        >Health & Beauty</NuxtLink>
         <NuxtLink
           to="/home-office"
           class="block text-lg font-medium text-gray-800 hover:text-blue-600"
-          >Home & Office</NuxtLink
-        >
+        >Home & Office</NuxtLink>
         <NuxtLink
           to="/computing"
           class="block text-lg font-medium text-gray-800 hover:text-blue-600"
-          >Computing</NuxtLink
-        >
+        >Computing</NuxtLink>
       </nav>
     </div>
   </header>
 </template>
 
 <script lang="ts">
+import { ref } from 'vue';
+
 export default {
-  name: "Header",
-  data() {
-    return {
-      isMenuOpen: false, // Tracks if the mobile menu is open
+  name: 'default',
+  setup() {
+    const isMenuOpen = ref(false); // Mobile menu state
+
+    // Toggle the mobile menu
+    const toggleMenu = () => {
+      isMenuOpen.value = !isMenuOpen.value;
     };
-  },
-  methods: {
-    toggleMenu() {
-      this.isMenuOpen = !this.isMenuOpen; // Toggle the mobile menu visibility
-    },
+
+    return {
+      isMenuOpen,
+      toggleMenu,
+    };
   },
 };
 </script>

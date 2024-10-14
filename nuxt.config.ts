@@ -30,6 +30,7 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxtjs/google-fonts",
     "@nuxt/image",
+    '@pinia/nuxt',
    
   ],
 
